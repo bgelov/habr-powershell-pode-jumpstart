@@ -1,2 +1,4 @@
-# habr-powershell-pode-jumpstart
-Jump Start in Powershell Pode
+# Jump Start в Powershell Pode
+Статью об опыте использования Powershell Pode вы можете прочитать по этой ссылке на Habr: 
+
+
