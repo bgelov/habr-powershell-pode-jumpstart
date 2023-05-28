@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Перезапуск службы на сервере по клику на сайте</title>
+        <!--- Стили, чтобы у таблицы отображались границы --->
+		<style>
+			table, th, td {
+			  border: 1px solid black;
+			  border-collapse: collapse;
+			  padding: 7px;
+			}
+		</style>
+    </head>
+    <body>
+        <table>
+            <!--- Первая строка с заголовками столбцов таблицы --->
+			<tr>
+				<th>Display Name</th>
+				<th>Name</th>
+				<th>Status</th>
+				<th>Actions</th>
+			</tr>
+            <!--- Формируем остальные строки таблицы --->
+            <!--- Здесь начинается Powershell --->
+			$(foreach ($service in Get-Service) {
+				"<tr>
+					<td>$($service.DisplayName)</td>
+					<td>$($service.Name)</td>
+					<td>$($service.Status)</td>
+					<td>
+                        <!--- Отправляем на маршруты с действиями имя службы --->
+						<a href=`"/start?name=$($service.name)`">Start</a>
+						<a href=`"/stop?name=$($service.name)`">Stop</a>
+						<a href=`"/restart?name=$($service.name)`">Restart</a>
+					</td>
+				</tr>"
+			})
+            <!--- Здесь заканчивается Powershell --->
+		</table>
+    </body>
+</html>
