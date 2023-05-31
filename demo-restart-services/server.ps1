@@ -1,5 +1,6 @@
 ﻿Start-PodeServer {
 
+    # Ограничиваем список служб
     $services = "AdobeARMservice", "bits", "spooler", "wuauserv"
 
     # Запускаем сервер на http://localhost:8080
@@ -14,15 +15,18 @@
         # Получаем информацию о службах
         $data = Get-Service $($using:services)
 
-        # Указываем, что мы обращаемся к шаблону restart-services.pode в директории /views
-        # и передаём в шаблон хэш-таблицу с результатом выполнения Get-Service
+        # Указываем, что мы обращаемся к шаблону restart-services.pode
+        # в директории /views и передаём в шаблон хэш-таблицу
+        # с результатом выполнения Get-Service
         Write-PodeViewResponse -Path 'restart-services' -Data @{ "services" = $data }
     }
 
     # Маршрут для запуска службы
     Add-PodeRoute -Method Get -Path '/start' -ScriptBlock {
-        Write-Host $WebEvent.Query["name"]
-        # Получаем имя службы из переданного параметра. В коде шаблона это ?name=$($service.name)
+        
+        # Получаем значение параметра name
+        # В коде шаблона это ?name=$($service.name)
+        # При переходе в браузере, например, http://localhost:8080/start?name=spooler
         $service_name = $WebEvent.Query["name"]
 
         # Проверяем, есть ли служба в списке
@@ -30,7 +34,6 @@
 
             # Если есть, выполняем старт службы
             Start-Service -name $service_name
-            
         }
 
         # Перенаправляем пользователя на страницу с таблицей
