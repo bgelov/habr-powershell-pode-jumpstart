@@ -2,6 +2,8 @@
 ![Powershell-Pode](https://github.com/bgelov/habr-powershell-pode-jumpstart/assets/5302940/a2ea3c60-9ca6-4c8b-89bb-0a7157ad2eb5)
 
 Полную статью об опыте использования Powershell Pode вы можете прочитать по этой ссылке на Habr: https://habr.com/ru/articles/737642/
+
+
 Ссылка на официальный репозиторий Pode: https://github.com/Badgerati/Pode
 
 
